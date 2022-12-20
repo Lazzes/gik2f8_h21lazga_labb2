@@ -82,29 +82,21 @@ class Api {
 
   /* Delete = DELETE. Här heter dock metoden som hanterar DELETE-förfrågan "remove". delete får inte användas som metod- funktions- eller variabelnamn i JavaScript, då det är ett ord reserverat av JavaScript-språket självt.  */
   remove(id) {
-    /*  Innan ni går vidare med remove, så måste ni se till att server-koden från L5 har en sak från L5 fixad: 
-      I server/app.js ska  
-        res.header('Access-Control-Allow-Method', '*') 
-      ha ändrats till till 
-        res.header('Access-Control-Allow-Methods', '*'); (Method->Methods, alltså)  */
-
-    /* Log för att se att rätt uppgift är på väg att tas bort */
-    console.log(`Removing task with id ${id}`);
-
-    /* Här behövs, precis som vid POST, lite mer inställningar. Fetch behöver dock inte heller här ett requestobjekt. Det går bra att skicka de sakerna som man skulle ha skickat till requestobjektets konstruktor direkt till fetch-funktionen. 
-
-    Det som skickas in som förfrågan är alltså url, som första argument och en uppsättning inställningar i ett objekt, som andra argument. Precis som när POST-requesten skapades ovan, i create ovan. 
-
-    Det enda som finns i objektet, som skickas in som andra argument till fetch, är att sätta method till delete, eftersom det är den HTTP-metoden som ska användas här. 
-
-    Egentligen skulle jag ha kunnat satt exakt samma kedja av then-anrop här som vid create (POST) och getAll (READ), men det är inte helt relevant vad som kommer till baka från ett delete-anrop. 
-    */
+    console.log(`Removing task with id ${id}`); /* Log för att se att rätt uppgift är på väg att tas bort */
     return fetch(`${this.url}/${id}`, {
       method: 'DELETE'
     })
       .then((result) => result)
       .catch((err) => console.log(err));
   }
+  update(id) {
+    return fetch(`${this.url}/${id}`, {
+      method: 'INPUT'
+    })
+      .then((result) => result)
+      .catch((err) => console.log(err))
+  }
+
 
   /***********************Labb 2 ***********************/
   /* Här skulle det vara lämpligt att skriva en metod likt getAll, create och delete anropas från script.js när någon har markerat en uppgift som färdig. Denna metod bör ansvara för att göra en PUT eller PATCH-förfrågan till vårt backend, precis som create-metoden ansvarar för att göra ett POST-anrop. Metoden här ska alltså motsvara Update = PUT/PATCH. En sådan förfrågan görs med hjälp av fetch(). 

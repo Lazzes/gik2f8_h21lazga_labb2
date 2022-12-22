@@ -89,13 +89,14 @@ class Api {
       .then((result) => result)
       .catch((err) => console.log(err));
   }
-  update(id) {
+   update(id) {
     return fetch(`${this.url}/${id}`, {
-      method: 'INPUT'
+      method: 'PATCH',
     })
       .then((result) => result)
-      .catch((err) => console.log(err))
+      .catch((err) => console.log(err));
   }
+  
 
 
   /***********************Labb 2 ***********************/

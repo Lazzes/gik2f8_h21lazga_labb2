@@ -276,15 +276,16 @@ function sortDueDate(tasks) {
 }
 
 function sortFinished(tasks) {
-  tasks.sort((f, l) => {
-    if (f.completed < l.completed){
+  tasks.sort((a, b) => {
+    if (a.completed && !b.completed) {
+      return 1;
+    } else if (!a.completed && b.completed) {
       return -1;
     }
-    else if (f.completed > l.completed){
-      return 1;
-    }
+    return 0;
   });
 }
+
 
 renderList();
 
